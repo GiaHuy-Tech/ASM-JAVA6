@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,6 @@
       color: #f5f5f5;
       font-family: "Segoe UI", Roboto, sans-serif;
     }
-
     .text-gold { color: #e6c300 !important; }
     .btn-gold {
       background-color: #e6c300;
@@ -23,32 +22,21 @@
       transition: 0.3s;
     }
     .btn-gold:hover { background-color: #ffde59; color: #150035; }
-
     .navbar .nav-link:hover { color: #ffde59 !important; }
-
     .table {
       background-color: #1a1735;
       color: #f5f5f5;
       border-radius: 10px;
       overflow: hidden;
     }
-
     th {
       background-color: #2b2660;
       color: #e6c300;
       text-transform: uppercase;
       font-weight: 600;
     }
-
-    td {
-      vertical-align: middle;
-    }
-
-    tr:hover {
-      background-color: #25204d;
-      transition: 0.3s;
-    }
-
+    td { vertical-align: middle; }
+    tr:hover { background-color: #25204d; transition: 0.3s; }
     .table img {
       width: 70px;
       height: 70px;
@@ -56,84 +44,137 @@
       border-radius: 10px;
       border: 1px solid #3b3486;
     }
-
     footer {
       background-color: #120f27;
       color: #ddd;
       border-top: 1px solid #e6c300;
     }
-
     a { color: #e6c300; text-decoration: none; }
     a:hover { color: #ffde59; }
-    .search-bar input::placeholder {
-	color: #bbb;
-}
+    .search-bar input::placeholder { color: #bbb; }
   </style>
 </head>
 
 <body>
-	<!-- Header -->
-	<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3"
-		style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
-		<div class="container-fluid">
-			<!-- Logo -->
-			<a class="navbar-brand d-flex align-items-center" href="/"> <img
-				src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-				alt="logo" width="45" class="me-2"> <span
-				class="fw-bold text-gold fs-4">Mom Physic</span>
-			</a>
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3"
+	style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+	<div class="container">
+		<!-- Logo -->
+		<a class="navbar-brand d-flex align-items-center gap-2" href="/">
+			<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="40">
+			<span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+		</a>
 
-			<!-- Toggle -->
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-			<!-- Menu + Search -->
-			<div
-				class="collapse navbar-collapse justify-content-end align-items-center"
-				id="navbarNav">
-				<ul class="navbar-nav me-3">
-					
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/login">Đăng nhập</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/cart">Giỏ hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/orders">Đơn hàng</a></li>
+		<!-- Menu -->
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav">
+			<ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
 
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/account">Tài khoản</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/products">Sản phẩm</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/wishlist">Yêu thích</a></li>
-				</ul>
-
-				<!-- Thanh tìm kiếm -->
-				<form class="d-flex align-items-center search-bar">
-					<div
-						class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
-						<input type="text"
-							class="form-control bg-transparent text-light border-0 shadow-none"
-							placeholder="Tìm sản phẩm..."> <select
-							class="form-select bg-transparent text-light border-0 shadow-none w-auto">
-							<option selected>Danh mục</option>
-							<option>Gundam</option>
-							<option>Marvel</option>
-							<option>Ô tô</option>
-							<option>Collectibles</option>
-						</select>
-					</div>
-					<a href="#"
-						class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
-						<i class="bi bi-search"></i>
+				<!-- Trang sản phẩm -->
+				<li class="nav-item mx-2">
+					<a class="nav-link text-gold" href="/products">
+						<i class="bi bi-box-seam fs-5"></i>
 					</a>
-				</form>
-			</div>
-			</div>
-		</nav>
+				</li>
 
+				<!-- Nếu chưa đăng nhập -->
+				<th:block th:if="${session.account == null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/login">
+							<i class="bi bi-box-arrow-in-right fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+
+				<!-- Nếu đã đăng nhập -->
+				<th:block th:if="${session.account != null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/cart/add">
+							<i class="bi bi-cart3 fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/orders">
+							<i class="bi bi-bag-check fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/wishlist">
+							<i class="bi bi-heart fs-5"></i>
+						</a>
+					</li>
+
+					<!-- Dropdown avatar -->
+					<li class="nav-item dropdown mx-2">
+						<a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img th:if="${session.account.photo != null}"
+								th:src="@{${session.account.photo}}" alt="avatar"
+								class="rounded-circle border border-gold"
+								style="width: 36px; height: 36px; object-fit: cover;">
+							<i th:if="${session.account.photo == null}"
+								class="bi bi-person-circle fs-3 text-warning"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+							aria-labelledby="userDropdown">
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/account">
+									<i class="bi bi-person"></i>
+									<span>Thông tin tài khoản</span>
+								</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/logout">
+									<i class="bi bi-box-arrow-right"></i>
+									<span>Đăng xuất</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Search -->
+			<form class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+				<div class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
+					<input type="text"
+						class="form-control bg-transparent text-light border-0 shadow-none"
+						placeholder="Tìm sản phẩm...">
+					<select class="form-select bg-transparent text-light border-0 shadow-none w-auto">
+						<option selected>Danh mục</option>
+						<option>Gundam</option>
+						<option>Marvel</option>
+						<option>Ô tô</option>
+						<option>Collectibles</option>
+					</select>
+				</div>
+				<a href="#"
+					class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
+					<i class="bi bi-search"></i>
+				</a>
+			</form>
+		</div>
+	</div>
+</nav>
+
+<!-- ✅ Hiển thị thông báo khi người dùng like lại sản phẩm -->
+<div th:if="${message != null and !#strings.isEmpty(message)}" class="container mt-4">
+  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert"
+       style="background-color:#fff3cd; color:#664d03; border:1px solid #ffeeba; border-radius:10px;">
+    <strong th:text="${message}"></strong>
+    <button type="button" class="btn btn-sm btn-outline-dark ms-3" data-bs-dismiss="alert">Đã hiểu</button>
+  </div>
+</div>
 
 <!-- Wishlist Table -->
 <section class="py-5">
@@ -151,36 +192,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><img src="https://picsum.photos/200/200?random=1" alt="Iron Man"></td>
-            <td>Mô hình Iron Man</td>
-            <td class="text-warning fw-bold">1.250.000₫</td>
-            <td>10/10/2025</td>
+          <tr th:each="like : ${likes}">
             <td>
-              <button class="btn btn-gold btn-sm me-2"><i class="bi bi-cart"></i></button>
-              <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+              <img th:src="${like.product != null ? like.product.image : '/images/no-image.png'}" 
+                   th:alt="${like.product != null ? like.product.name : 'No Image'}">
             </td>
-          </tr>
-
-          <tr>
-            <td><img src="https://picsum.photos/200/200?random=2" alt="Gundam"></td>
-            <td>Mô hình RX-78 Gundam</td>
-            <td class="text-warning fw-bold">890.000₫</td>
-            <td>08/10/2025</td>
-            <td>
-              <button class="btn btn-gold btn-sm me-2"><i class="bi bi-cart"></i></button>
-              <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+            <td th:text="${like.product != null ? like.product.name : 'N/A'}"></td>
+            <td class="text-warning fw-bold" 
+                th:text="${like.product != null && like.product.price != null ? #numbers.formatDecimal(like.product.price, 0, 0) + '₫' : 'N/A'}">
             </td>
-          </tr>
-
-          <tr>
-            <td><img src="https://picsum.photos/200/200?random=3" alt="Batman"></td>
-            <td>Mô hình Batman</td>
-            <td class="text-warning fw-bold">1.050.000₫</td>
-            <td>05/10/2025</td>
+            <td th:text="${like.likedAt != null ? #dates.format(like.likedAt, 'dd/MM/yyyy') : 'N/A'}"></td>
             <td>
-              <button class="btn btn-gold btn-sm me-2"><i class="bi bi-cart"></i></button>
-              <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+              <a th:href="@{'/wishlist/add-to-cart/' + ${like.product.id}}" class="btn btn-gold btn-sm me-2" 
+                 th:if="${like.product != null}"><i class="bi bi-cart"></i></a>
+              <a th:href="@{'/wishlist/remove/' + ${like.id}}" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></a>
             </td>
           </tr>
         </tbody>

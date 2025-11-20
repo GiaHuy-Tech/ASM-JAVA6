@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +14,7 @@
     color: #fff;
     font-family: "Poppins", sans-serif;
   }
-  .navbar, footer {
-    background-color: #150035;
-  }
+  .navbar, footer { background-color: #150035; }
   .text-gold { color: #e5c100 !important; }
   .btn-gold {
     background-color: #e5c100;
@@ -23,10 +22,7 @@
     border: none;
     transition: 0.3s;
   }
-  .btn-gold:hover {
-    background-color: #c9aa00;
-    color: #fff;
-  }
+  .btn-gold:hover { background-color: #c9aa00; color: #fff; }
   .card {
     background-color: #1a0a33;
     color: #e5c100;
@@ -42,9 +38,7 @@
     color: #fff;
     border: 1px solid #3d1a78;
   }
-  .form-control::placeholder {
-    color: #aaa;
-  }
+  .form-control::placeholder { color: #aaa; }
   .list-group-item {
     background-color: #1a0a33;
     color: #e5c100;
@@ -54,73 +48,68 @@
     border-top: 1px solid #3d1a78;
     color: #e5c100;
   }
-  .search-bar input::placeholder {
-	color: #bbb;
-}
+  .qr-code-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 0.375rem;
+    margin: 0 auto;
+    display: none;
+  }
 </style>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3"
-		style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
-		<div class="container-fluid">
-			<!-- Logo -->
-			<a class="navbar-brand d-flex align-items-center" href="/"> <img
-				src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-				alt="logo" width="45" class="me-2"> <span
-				class="fw-bold text-gold fs-4">Mom Physic</span>
-			</a>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3"
+	style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+	<div class="container">
+		<a class="navbar-brand d-flex align-items-center gap-2" href="/">
+			<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="40">
+			<span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+		</a>
 
-			<!-- Toggle -->
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-			<!-- Menu + Search -->
-			<div
-				class="collapse navbar-collapse justify-content-end align-items-center"
-				id="navbarNav">
-				<ul class="navbar-nav me-3">
-					
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/login">Đăng nhập</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/cart">Giỏ hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/orders">Đơn hàng</a></li>
-
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/account">Tài khoản</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/products">Sản phẩm</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/wishlist">Yêu thích</a></li>
-				</ul>
-
-				<!-- Thanh tìm kiếm -->
-				<form class="d-flex align-items-center search-bar">
-					<div
-						class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
-						<input type="text"
-							class="form-control bg-transparent text-light border-0 shadow-none"
-							placeholder="Tìm sản phẩm..."> <select
-							class="form-select bg-transparent text-light border-0 shadow-none w-auto">
-							<option selected>Danh mục</option>
-							<option>Gundam</option>
-							<option>Marvel</option>
-							<option>Ô tô</option>
-							<option>Collectibles</option>
-						</select>
-					</div>
-					<a href="#"
-						class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
-						<i class="bi bi-search"></i>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
+				<li class="nav-item mx-2">
+					<a class="nav-link text-gold" href="/products">
+						<i class="bi bi-box-seam fs-5"></i>
 					</a>
-				</form>
-			</div>
-			</div>
-		</nav>
+				</li>
+				<th:block th:if="${session.account == null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/login">
+							<i class="bi bi-box-arrow-in-right fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+				<th:block th:if="${session.account != null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/cart">
+							<i class="bi bi-cart3 fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/orders">
+							<i class="bi bi-bag-check fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/wishlist">
+							<i class="bi bi-heart fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+			</ul>
+		</div>
+	</div>
+</nav>
 
 <!-- Thanh toán -->
 <section class="py-5">
@@ -132,26 +121,31 @@
         <div class="card">
           <div class="card-header fw-semibold">Thông tin giao hàng</div>
           <div class="card-body">
-            <form>
+            <!-- ✅ Gắn mapping theo controller -->
+            <form th:action="@{/checkout}" method="post">
               <div class="mb-3">
                 <label class="form-label">Họ tên</label>
-                <input type="text" class="form-control" placeholder="Nhập họ tên">
+                <input type="text" class="form-control" name="fullName"
+                       th:value="${account.fullName}" placeholder="Nhập họ tên" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="Nhập email">
+                <input type="email" class="form-control"
+                       th:value="${account.email}" readonly>
               </div>
               <div class="mb-3">
                 <label class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" placeholder="Nhập địa chỉ giao hàng">
+                <input type="text" class="form-control" name="address"
+                       th:value="${account.address}" placeholder="Nhập địa chỉ giao hàng" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Số điện thoại</label>
-                <input type="text" class="form-control" placeholder="Nhập số điện thoại">
+                <input type="text" class="form-control" name="phone"
+                       th:value="${account.phone}" placeholder="Nhập số điện thoại" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Phương thức thanh toán</label>
-                <select class="form-select">
+                <select class="form-select" id="paymentMethodSelect" name="paymentMethod">
                   <option value="COD">Thanh toán khi nhận hàng (COD)</option>
                   <option value="MOMO">Momo</option>
                   <option value="VNPAY">VNPay</option>
@@ -163,23 +157,34 @@
         </div>
       </div>
 
-      <!-- Thông tin giỏ hàng -->
+      <!-- Thông tin đơn hàng -->
       <div class="col-md-5">
-        <div class="card">
+        <div class="card mb-4">
           <div class="card-header fw-semibold">Đơn hàng của bạn</div>
           <div class="card-body">
             <ul class="list-group mb-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Mô hình Gundam RX-78 <span>2 × 850.000₫</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Iron Man MK85 <span>1 × 1.200.000₫</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Ô tô Porsche 911 <span>3 × 350.000₫</span>
+              <li class="list-group-item d-flex justify-content-between align-items-center"
+                  th:each="item : ${cartDetails}">
+                <span th:text="${item.product.name}"></span>
+                <span th:text="${item.quantity} + ' × ' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '₫'"></span>
               </li>
             </ul>
-            <h5 class="text-end fw-bold text-gold">Tổng cộng: 3.750.000₫</h5>
+            <h5 class="text-end fw-bold text-gold"
+                th:text="'Tổng cộng: ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">
+                Tổng cộng
+            </h5>
+          </div>
+        </div>
+
+        <!-- QR code -->
+        <div class="card" id="qrCodeCard" style="display: none;">
+          <div class="card-header fw-semibold">Quét mã để thanh toán</div>
+          <div class="card-body text-center">
+            <img id="momoQr" src="/images/momo.jpg" alt="Momo QR Code" class="qr-code-image">
+            <img id="vnpayQr" src="/images/vnpay.jpg" alt="VNPay QR Code" class="qr-code-image">
+            <p class="mt-3 mb-0 text-white-50">
+              Sử dụng ứng dụng ngân hàng hoặc ví điện tử để quét mã.
+            </p>
           </div>
         </div>
       </div>
@@ -187,7 +192,6 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer class="text-center py-4 mt-5">
   <div class="container">
     <p class="mb-0">© 2025 <span class="fw-bold text-gold">Mom Physic</span> — All Rights Reserved.</p>
@@ -195,5 +199,29 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const paymentSelect = document.getElementById('paymentMethodSelect');
+    const qrCard = document.getElementById('qrCodeCard');
+    const momoQr = document.getElementById('momoQr');
+    const vnpayQr = document.getElementById('vnpayQr');
+
+    paymentSelect.addEventListener('change', function() {
+      const selectedValue = this.value;
+      qrCard.style.display = 'none';
+      momoQr.style.display = 'none';
+      vnpayQr.style.display = 'none';
+
+      if (selectedValue === 'MOMO') {
+        qrCard.style.display = 'block';
+        momoQr.style.display = 'block';
+      } else if (selectedValue === 'VNPAY') {
+        qrCard.style.display = 'block';
+        vnpayQr.style.display = 'block';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>

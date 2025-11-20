@@ -77,16 +77,119 @@ label {
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3"
-		style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
-		<div class="container-fluid">
-			<a class="navbar-brand d-flex align-items-center" href="/"> <img
-				src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-				alt="logo" width="45" class="me-2"> <span
-				class="fw-bold text-gold fs-4">Mom Physic</span>
-			</a>
+	<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3"
+	style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+	<div class="container">
+		<!-- Logo -->
+		<a class="navbar-brand d-flex align-items-center gap-2" href="/">
+			<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="40">
+			<span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+		</a>
+
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Menu -->
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav">
+			<ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
+
+				<!-- Trang sản phẩm -->
+				<li class="nav-item mx-2">
+					<a class="nav-link text-gold" href="/products">
+						<i class="bi bi-box-seam fs-5"></i>
+					</a>
+				</li>
+
+				<!-- Nếu chưa đăng nhập -->
+				<th:block th:if="${session.account == null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/login">
+							<i class="bi bi-box-arrow-in-right fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+
+				<!-- Nếu đã đăng nhập -->
+				<th:block th:if="${session.account != null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/cart">
+							<i class="bi bi-cart3 fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/orders">
+							<i class="bi bi-bag-check fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/wishlist">
+							<i class="bi bi-heart fs-5"></i>
+						</a>
+					</li>
+
+					<!-- Dropdown avatar -->
+					<li class="nav-item dropdown mx-2">
+						<a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<!-- Nếu có avatar thì hiển thị ảnh -->
+							<img th:if="${session.account.photo != null}"
+								th:src="@{${session.account.photo}}" alt="avatar"
+								class="rounded-circle border border-gold"
+								style="width: 36px; height: 36px; object-fit: cover;">
+							<!-- Nếu chưa có avatar thì hiển thị icon -->
+							<i th:if="${session.account.photo == null}"
+								class="bi bi-person-circle fs-3 text-warning"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+							aria-labelledby="userDropdown">
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/account">
+									<i class="bi bi-person"></i>
+									<span>Thông tin tài khoản</span>
+								</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/logout">
+									<i class="bi bi-box-arrow-right"></i>
+									<span>Đăng xuất</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Search -->
+			<form class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+				<div class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
+					<input type="text"
+						class="form-control bg-transparent text-light border-0 shadow-none"
+						placeholder="Tìm sản phẩm...">
+					<select class="form-select bg-transparent text-light border-0 shadow-none w-auto">
+						<option selected>Danh mục</option>
+						<option>Gundam</option>
+						<option>Marvel</option>
+						<option>Ô tô</option>
+						<option>Collectibles</option>
+					</select>
+				</div>
+				<a href="#"
+					class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
+					<i class="bi bi-search"></i>
+				</a>
+			</form>
 		</div>
-	</nav>
+	</div>
+</nav>
+
 
 	<section class="py-5">
 		<div class="container">

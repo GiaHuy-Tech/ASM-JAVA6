@@ -1,243 +1,180 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Giỏ hàng - Mom Physic</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Mom Physic</title>
 
-  <style>
-    body {
-      background-color: #0b021c;
-      color: #fff;
-      font-family: "Poppins", sans-serif;
-    }
-    .navbar, footer {	
-      background-color: #150035;
-    }
-    .text-gold { color: #e5c100 !important; }
-    .btn-gold {
-      background-color: #e5c100;
-      color: #150035;
-      border: none;
-      transition: all 0.3s ease;
-    }
-    .btn-gold:hover {
-      background-color: #c9aa00;
-      color: #fff;
-      box-shadow: 0 0 10px rgba(229,193,0,0.5);
-    }
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    /* Bảng giỏ hàng */
-    .table {
-      background-color: #150035;
-      color: #e5c100;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(229, 193, 0, 0.3);
-    }
-    .table thead {
-      background-color: #1f004d;
-      color: #e5c100;
-    }
-    .table tbody tr {
-      transition: 0.3s;
-    }
-    .table tbody tr:hover {
-      background-color: rgba(229, 193, 0, 0.08);
-    }
-    .table td, .table th {
-      vertical-align: middle;
-    }
-    .table input {
-      background-color: transparent;
-      color: #fff;
-      border: 1px solid #3d1a78;
-    }
-    .btn-danger {
-      background-color: #9a0036;
-      border: none;
-      transition: 0.3s;
-    }
-    .btn-danger:hover {
-      background-color: #b90b4d;
-    }
+    <style>
+        body {
+            background-color: #0b021c;
+            color: #fff;
+            font-family: "Poppins", sans-serif;
+        }
 
-    footer {
-      border-top: 1px solid #3d1a78;
-      color: #e5c100;
-    }
-  body {
-    background-color: #0b021c;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-  }
-  .navbar, footer {	
-    background-color: #150035;
-  }
-  .text-gold { color: #e5c100 !important; }
-  .btn-gold {
-    background-color: #e5c100;
-    color: #150035;
-    border: none;
-    transition: all 0.3s ease;
-  }
-  .btn-gold:hover {
-    background-color: #c9aa00;
-    color: #fff;
-  }
+        .navbar, footer {
+            background-color: #150035;
+        }
 
-  /* ép màu bảng và chữ */
-  .table {
-    background-color: #1a0a33 !important;   /* tím than */
-    color: #e5c100 !important;              /* vàng */
-    border-radius: 8px;
-    overflow: hidden;
-  }
+        .text-gold {
+            color: #e5c100 !important;
+        }
 
-  .table thead {
-    background-color: #291155 !important;
-    color: #e5c100 !important;
-  }
+        .btn-gold {
+            background-color: #e5c100;
+            color: #150035;
+            border: none;
+            transition: 0.3s;
+        }
 
-  .table td, .table th {
-    border-color: #3d1a78 !important;
-  }
+        .btn-gold:hover {
+            background-color: #c9aa00;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(229, 193, 0, 0.5);
+        }
 
-  .table input {
-    background-color: transparent !important;
-    color: #fff !important;
-    border: 1px solid #3d1a78 !important;
-  }
+        .table {
+            background-color: #1a0a33 !important;
+            color: #e5c100 !important;
+            border-radius: 8px;
+            border: 1px solid rgba(229, 193, 0, 0.3);
+        }
 
-  footer {
-    border-top: 1px solid #3d1a78;
-    color: #e5c100;
-  }
-  .table input {
-  background-color: rgb(255, 255, 255) !important;       /* nền đen */
-  color: rgb(0, 0, 0) !important;                  /* chữ trắng */
-  border: 1px solid #3d1a78 !important;    /* viền tím */
-  text-align: center;
-}
-  .search-bar input::placeholder {
-	color: #bbb;
-}
-</style>
-    
+        .table thead {
+            background-color: #291155 !important;
+            color: #e5c100 !important;
+        }
+
+        .table td, .table th {
+            border-color: #3d1a78 !important;
+            vertical-align: middle;
+        }
+
+        .btn-danger {
+            background-color: #9a0036;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-danger:hover {
+            background-color: #b90b4d;
+        }
+    </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3"
-		style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
-		<div class="container-fluid">
-			<!-- Logo -->
-			<a class="navbar-brand d-flex align-items-center" href="/"> <img
-				src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
-				alt="logo" width="45" class="me-2"> <span
-				class="fw-bold text-gold fs-4">Mom Physic</span>
-			</a>
 
-			<!-- Toggle -->
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3" style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+            <img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png" alt="logo" width="40">
+            <span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+        </a>
 
-			<!-- Menu + Search -->
-			<div
-				class="collapse navbar-collapse justify-content-end align-items-center"
-				id="navbarNav">
-				<ul class="navbar-nav me-3">
-					
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/login">Đăng nhập</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/cart">Giỏ hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/orders">Đơn hàng</a></li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/account">Tài khoản</a></li>
-					<li class="nav-item"><a class="nav-link text-gold"
-						href="/products">Sản phẩm</a></li>
-						<li class="nav-item"><a class="nav-link text-gold"
-						href="/wishlist">Yêu thích</a></li>
-				</ul>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
+                <li class="nav-item mx-2">
+                    <a class="nav-link text-gold" href="/products">
+                        <i class="bi bi-box-seam fs-5"></i>
+                    </a>
+                </li>
 
-				<!-- Thanh tìm kiếm -->
-				<form class="d-flex align-items-center search-bar">
-					<div
-						class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
-						<input type="text"
-							class="form-control bg-transparent text-light border-0 shadow-none"
-							placeholder="Tìm sản phẩm..."> <select
-							class="form-select bg-transparent text-light border-0 shadow-none w-auto">
-							<option selected>Danh mục</option>
-							<option>Gundam</option>
-							<option>Marvel</option>
-							<option>Ô tô</option>
-							<option>Collectibles</option>
-						</select>
-					</div>
-					<a href="#"
-						class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
-						<i class="bi bi-search"></i>
-					</a>
-				</form>
-			</div>
-			</div>
-		</nav>
+                <!-- Nếu chưa đăng nhập -->
+                <th:block th:if="${session.account == null}">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-gold" href="/login">
+                            <i class="bi bi-box-arrow-in-right fs-5"></i>
+                        </a>
+                    </li>
+                </th:block>
+
+                <!-- Nếu đã đăng nhập -->
+                <th:block th:if="${session.account != null}">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-gold" href="/cart">
+                            <i class="bi bi-cart3 fs-5"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-gold" href="/wishlist">
+                            <i class="bi bi-heart fs-5"></i>
+                        </a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <!-- Giỏ hàng -->
 <section class="py-5">
-  <div class="container">
-    <h3 class="fw-bold text-gold mb-4">🛒 Giỏ hàng của bạn</h3>
-    <div class="table-responsive rounded-3 shadow">
-      <table class="table align-middle text-center">
-        <thead>
-          <tr>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Tổng</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="fw-semibold">Mô hình Gundam RX-78</td>
-            <td>850.000₫</td>
-            <td><input type="number" value="1" class="form-control mx-auto text-center" style="width:80px;"></td>
-            <td>850.000₫</td>
-            <td><a href="#" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a></td>
-          </tr>
-          <tr>
-            <td class="fw-semibold">Mô hình Iron Man MK85</td>
-            <td>1.200.000₫</td>
-            <td><input type="number" value="2" class="form-control mx-auto text-center" style="width:80px;"></td>
-            <td>2.400.000₫</td>
-            <td><a href="#" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="container">
+        <h3 class="fw-bold text-gold mb-4">🛒 Giỏ hàng của bạn</h3>
 
-    <div class="text-end mt-4">
-      <h5 class="text-gold fw-bold mb-3">Tổng cộng: 3.250.000₫</h5>
-      <a href="checkout.html" class="btn btn-gold btn-lg rounded-pill px-4">
-        <i class="bi bi-credit-card"></i> Thanh toán
-      </a>
+        <div class="table-responsive rounded-3 shadow">
+            <table class="table text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cartDetails}">
+                        <td class="text-light">
+                            <div class="d-flex align-items-center justify-content-center gap-3">
+                                <img th:src="@{${item.product.image}}" alt="product" width="70" height="70" class="rounded-3 border border-secondary">
+                                <span th:text="${item.product.name}">Tên sản phẩm</span>
+                            </div>
+                        </td>
+                        <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')} + '₫'"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="${#numbers.formatDecimal(item.price * item.quantity, 0, 'COMMA', 0, 'POINT')} + '₫'"></td>
+                        <td>
+                            <a th:href="@{'/cart/delete/' + ${item.id}}" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(cartDetails)}">
+                        <td colspan="5" class="text-center text-light py-4">Giỏ hàng của bạn đang trống</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-end mt-4" th:if="${!#lists.isEmpty(cartDetails)}">
+            <h5 class="text-gold fw-bold mb-3">
+                Tổng cộng:
+                <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + '₫'">0₫</span>
+            </h5>
+            <a th:href="@{/checkout}" class="btn btn-gold btn-lg rounded-pill px-4">
+                <i class="bi bi-credit-card"></i> Thanh toán
+            </a>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- Footer -->
 <footer class="text-center py-4 mt-5">
-  <div class="container">
-    <p class="mb-0">© 2025 <span class="fw-bold text-gold">Mom Physic</span> — All Rights Reserved.</p>
-  </div>
+    <div class="container">
+        <p class="mb-0">© 2025 <span class="fw-bold text-gold">Mom Physic</span> — All Rights Reserved.</p>
+    </div>
 </footer>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

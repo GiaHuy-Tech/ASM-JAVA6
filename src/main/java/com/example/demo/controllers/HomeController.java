@@ -1,26 +1,39 @@
-	package com.example.demo.controllers;
-	
-	import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;  
-	import org.springframework.ui.Model;
+package com.example.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.repository.CategoryRepository;
-	
-	
+import com.example.demo.repository.ProductRepository;
+import com.example.demo.model.Products;
 
+import java.util.List;
 
-
-@Controller
+@Controller	
 public class HomeController {
+	
+	@Autowired
+	private CategoryRepository categoryRepo;
+	
+	@Autowired
+	private ProductRepository productsRepo;
 
-    @Autowired
-    private CategoryRepository categoryRepo;
+	@GetMapping("/")
+	public String home(Model model) {
+		// Lấy tất cả danh mục
+		List<Products> featured = productsRepo.findByAvailableTrue();
+		model.addAttribute("featuredProducts", featured);
+		model.addAttribute("categories", categoryRepo.findAll());
+		// Lấy 8 sản phẩm mới nhất
+		List<Products> featuredProducts = productsRepo.findAllByOrderByIdDesc();
+		if (featuredProducts.size() > 8) {
+			featuredProducts = featuredProducts.subList(0, 8);
+		}
+		model.addAttribute("featuredProducts", featuredProducts);
+		return "client/index";
 
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("categories", categoryRepo.findAll());
-        return "client/index"; // Trang giao diện chính
-    }
+	}
+
 }
