@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model World - Shop</title>
+
+<!-- Bootstrap 5 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+	background-color: #0a0a0a;
+	color: #e5e5e5;
+	font-family: 'Roboto', sans-serif;
+	scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+.navbar {
+	background-color: rgba(10, 10, 10, 0.85);
+	backdrop-filter: blur(10px);
+}
+
+.navbar-brand span {
+	color: #0dcaf0;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.nav-link {
+	color: #fff;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.nav-link:hover {
+	color: #0dcaf0;
+}
+
+.navbar-toggler {
+	border-color: #0dcaf0;
+}
+
+/* SEARCH */
+.search-input {
+	border-radius: 50px;
+	background-color: #121212;
+	border: none;
+	color: #fff;
+	padding-right: 45px;
+}
+
+.search-input::placeholder {
+	color: #888;
+}
+
+.search-btn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: none;
+	background: transparent;
+	color: #0dcaf0;
+	cursor: pointer;
+}
+
+/* CAROUSEL */
+#heroCarousel .carousel-item img {
+	height: 500px;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+#heroCarousel .carousel-inner::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30%;
+	background: linear-gradient(to top, #0a0a0a, transparent);
+	border-radius: inherit;
+}
+
+/* CARD EFFECTS */
+.card-glow {
+	transition: transform 0.3s, box-shadow 0.3s;
+	border: 1px solid #1f1f1f;
+	border-radius: 12px;
+}
+
+.card-glow:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 20px #0dcaf0aa;
+}
+
+/* BUTTONS */
+.btn-custom {
+	border-radius: 50px;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.btn-custom:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 15px #0dcaf0aa;
+}
+
+/* FOOTER */
+footer {
+	border-top: 1px solid #333;
+	backdrop-filter: blur(5px);
+}
+
+.footer-link {
+	color: #bbb;
+	transition: 0.25s;
+	text-decoration: none;
+}
+
+.footer-link:hover {
+	color: #0dcaf0;
+	text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media ( max-width :768px) {
+	#heroCarousel .carousel-item img {
+		height: 300px;
+	}
+	.search-input {
+		width: 100%;
+	}
+}
+</style>
+</head>
+
+<body>
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark py-3">
+		<div class="container">
+			<a class="navbar-brand d-flex align-items-center" href="#"><i
+				class="fas fa-cube fs-3 me-2 text-info"></i><span class="fs-3">Model
+					World</span></a>
+			<button class="navbar-toggler" data-bs-toggle="collapse"
+				data-bs-target="#navMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navMenu">
+				<ul class="navbar-nav ms-4">
+					<li class="nav-item"><a class="nav-link px-3" href="#">Trang
+							chủ</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Sản
+							phẩm</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Hot
+							deal</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#"><i
+							class="fa-solid fa-heart"></i></a></li>
+				</ul>
+				<div class="ms-auto position-relative" style="width: 250px;">
+					<input type="text" class="form-control search-input"
+						placeholder="Tìm Gundam, Figure...">
+					<button class="search-btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+				<button class="btn btn-outline-light ms-3 me-2">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="btn btn-info">
+					<i class="fas fa-shopping-cart"></i>
+				</button>
+			</div>
+		</div>
+	</nav>
+
+	<!-- CAROUSEL -->
+	<div id="heroCarousel" class="carousel slide container mt-4"
+		data-bs-ride="carousel">
+		<div
+			class="carousel-inner rounded-4 position-relative overflow-hidden">
+			<div class="carousel-item active">
+				<img
+					src="https://i.pinimg.com/736x/ef/09/66/ef09667e8b1b3eb0f28a01b5e0558205.jpg"
+					class="d-block w-100 rounded">
+			</div>
+			<div class="carousel-item">
+				<img
+					src="https://i.pinimg.com/736x/50/8c/e7/508ce779a48d8924c781677f65b64878.jpg"
+					class="d-block w-100 rounded">
+			</div>
+			<div class="carousel-item">
+				<img
+					src="https://i.pinimg.com/736x/f6/2f/b5/f62fb589316f52c016838b03af2eb5a0.jpg"
+					class="d-block w-100 rounded">
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#heroCarousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon"></span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#heroCarousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon"></span>
+		</button>
+	</div>
+
+	<!-- CATEGORIES -->
+	<div class="container mt-5">
+		<h3 class="mb-3 text-info fw-bold">
+			<i class="fa-solid fa-grid-2 me-2"></i>Danh mục nổi bật
+		</h3>
+		<div class="row g-4">
+			<!-- Card mẫu -->
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow p-3 text-center">
+					<img
+						src="https://i.pinimg.com/736x/2b/c3/7d/2bc37d7c476296b31cd84f4a3acdfcea.jpg"
+						height="160" class="rounded">
+					<h5 class="mt-3">Gundam</h5>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow p-3 text-center">
+					<img
+						src="https://i.pinimg.com/736x/7f/93/73/7f9373a39beaf970d9f7f2aae62aff0c.jpg"
+						height="160" class="rounded">
+					<h5 class="mt-3">Figure Anime</h5>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow p-3 text-center">
+					<img
+						src="https://i.pinimg.com/736x/65/9f/9d/659f9d3f53f6f40778fabc8d7b9d1dbd.jpg"
+						height="160" class="rounded">
+					<h5 class="mt-3">Resin Model</h5>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow p-3 text-center">
+					<img
+						src="https://i.pinimg.com/736x/75/24/b6/7524b688c8cf9a36149c05d2da427dcf.jpg"
+						height="160" class="rounded">
+					<h5 class="mt-3">Phụ kiện</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- PRODUCT SECTIONS -->
+	<div class="container mt-5">
+		<!-- SẢN PHẨM MỚI -->
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h3 class="text-info fw-bold mb-0">
+				<i class="fa-solid fa-sparkles me-2"></i>Sản phẩm mới
+			</h3>
+			<a href="#" class="btn btn-outline-info btn-sm">Xem tất cả</a>
+		</div>
+		<div class="row g-4">
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Thêm product khác -->
+		</div>
+
+		<!-- HOT DEAL / SALE -->
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h3 class="text-danger fw-bold mt-5 mb-3">
+				<i class="fa-solid fa-fire me-2"></i>Hot Deal
+			</h3>
+			<a href="#" class="btn btn-outline-info btn-sm">Xem tất cả</a>
+		</div>
+
+		<div class="row g-4">
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Thêm product khác -->
+		</div>
+
+		<!-- BEST SELLERS -->
+
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h3 class="text-info fw-bold mt-5 mb-3">
+				<i class="fa-solid fa-ranking-star me-2"></i>Bán chạy
+			</h3>
+			<a href="#" class="btn btn-outline-info btn-sm">Xem tất cả</a>
+		</div>
+
+		<div class="row g-4">
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>RX-78-2 Gundam</h6>
+						<p class="text-info fw-bold">1.200.000₫</p>
+						<div class="d-flex gap-2">
+							<button class="btn btn-info flex-grow-1 btn-custom">
+								<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+							</button>
+							<button class="btn btn-outline-danger btn-custom">
+								<i class="fa-solid fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Thêm product khác -->
+		</div>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="bg-dark text-light mt-5 pt-5 pb-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Model World</h5>
+					<p>Mô hình Gundam, Figure & Resin Anime chất lượng cao.</p>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Liên kết</h5>
+					<a href="#" class="footer-link d-block mb-2">Trang chủ</a> <a
+						href="#" class="footer-link d-block mb-2">Sản phẩm</a> <a href="#"
+						class="footer-link d-block mb-2">Giỏ hàng</a> <a href="#"
+						class="footer-link d-block mb-2">Liên hệ</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Hỗ trợ</h5>
+					<a href="#" class="footer-link d-block mb-2">Chính sách bảo
+						hành</a> <a href="#" class="footer-link d-block mb-2">Chính sách
+						vận chuyển</a> <a href="#" class="footer-link d-block mb-2">Hướng
+						dẫn mua hàng</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Theo dõi</h5>
+					<a href="#" class="footer-link d-block"><i
+						class="fa-brands fa-facebook me-2"></i>Facebook</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-instagram me-2"></i>Instagram</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-tiktok me-2"></i>TikTok</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

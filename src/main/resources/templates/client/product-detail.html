@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model World - Chi tiết sản phẩm</title>
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+	background-color: #0a0a0a;
+	color: #e5e5e5;
+	font-family: 'Roboto', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+	background-color: rgba(10, 10, 10, 0.9);
+	backdrop-filter: blur(10px);
+}
+
+.navbar-brand span {
+	color: #0dcaf0;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.nav-link {
+	color: #fff;
+	transition: .3s;
+}
+
+.nav-link:hover {
+	color: #0dcaf0;
+}
+
+.search-input {
+	border-radius: 50px;
+	background-color: #121212;
+	border: none;
+	color: #fff;
+	padding-right: 45px;
+}
+
+.search-input::placeholder {
+	color: #888;
+}
+
+.search-btn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: none;
+	background: transparent;
+	color: #0dcaf0;
+	cursor: pointer;
+}
+
+/* PRODUCT DETAIL */
+.product-img-main {
+	width: 100%;
+	border-radius: 14px;
+	border: 1px solid #1f1f1f;
+}
+
+.thumb-img {
+	border-radius: 8px;
+	cursor: pointer;
+	border: 1px solid #333;
+	transition: .3s;
+}
+
+.thumb-img:hover {
+	transform: scale(1.05);
+	border-color: #0dcaf0;
+}
+
+.price {
+	font-size: 1.7rem;
+	font-weight: bold;
+	color: #0dcaf0;
+}
+
+.btn-buy {
+	border-radius: 50px;
+	font-weight: 500;
+}
+
+.btn-buy:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 15px #0dcaf0aa;
+}
+
+.btn-fav {
+	border-radius: 50px;
+	font-size: 1.1rem;
+}
+
+.btn-fav:hover {
+	background-color: #ff0055;
+	color: #fff;
+}
+
+/* COMMENTS */
+.comment-box {
+	background-color: #111;
+	border: 1px solid #222;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+/* FOOTER */
+footer {
+	border-top: 1px solid #333;
+	background-color: #0b0b0b;
+}
+
+.footer-link {
+	color: #bbb;
+	text-decoration: none;
+	transition: .25s;
+}
+
+.footer-link:hover {
+	color: #0dcaf0;
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark py-3">
+		<div class="container">
+			<a class="navbar-brand d-flex align-items-center" href="#"><i
+				class="fas fa-cube fs-3 me-2 text-info"></i><span class="fs-3">Model
+					World</span></a>
+			<button class="navbar-toggler" data-bs-toggle="collapse"
+				data-bs-target="#navMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navMenu">
+				<ul class="navbar-nav ms-4">
+					<li class="nav-item"><a class="nav-link px-3" href="#">Trang
+							chủ</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Sản
+							phẩm</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Hot
+							deal</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#"><i
+							class="fa-solid fa-heart"></i></a></li>
+				</ul>
+				<div class="ms-auto position-relative" style="width: 250px;">
+					<input type="text" class="form-control search-input"
+						placeholder="Tìm Gundam, Figure...">
+					<button class="search-btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+				<button class="btn btn-outline-light ms-3 me-2">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="btn btn-info">
+					<i class="fas fa-shopping-cart"></i>
+				</button>
+			</div>
+		</div>
+	</nav>
+
+	<!-- PRODUCT DETAIL -->
+	<div class="container mt-5">
+
+		<div class="row g-4">
+			<!-- LEFT: IMAGES -->
+			<div class="col-md-6">
+				<img
+					src="https://i.pinimg.com/736x/0a/ed/8b/0aed8b4b8f43893c6b5e1f17db7f6ec4.jpg"
+					class="product-img-main">
+
+				<div class="row mt-3 g-3">
+					<div class="col-4">
+						<img
+							src="https://i.pinimg.com/736x/ef/09/66/ef09667e8b1b3eb0f28a01b5e0558205.jpg"
+							class="thumb-img w-100">
+					</div>
+					<div class="col-4">
+						<img
+							src="https://i.pinimg.com/736x/50/8c/e7/508ce779a48d8924c781677f65b64878.jpg"
+							class="thumb-img w-100">
+					</div>
+					<div class="col-4">
+						<img
+							src="https://i.pinimg.com/736x/f6/2f/b5/f62fb589316f52c016838b03af2eb5a0.jpg"
+							class="thumb-img w-100">
+					</div>
+				</div>
+			</div>
+
+			<!-- RIGHT: INFO -->
+			<div class="col-md-6">
+				<h2 class="fw-bold">MG 1/100 RX-78-2 Gundam Ver.2.0</h2>
+
+				<div class="d-flex align-items-center mb-2">
+					<span class="ms-2 text-secondary">112 đánh giá</span>
+				</div>	
+
+				<p class="price">1.200.000₫</p>
+
+				<p class="text-light">Mô hình Master Grade tỉ lệ 1/100 với độ
+					chi tiết cao, khớp cử động mượt, decal đẹp và độ hoàn thiện cực
+					tốt. Phù hợp trưng bày và sưu tầm.</p>
+
+				<div class="d-flex gap-3 mt-4">
+					<button class="btn btn-info px-4 btn-buy">
+						<i class="fa-solid fa-cart-plus me-2"></i>Thêm giỏ hàng
+					</button>
+
+					<button class="btn btn-outline-danger px-4 btn-fav">
+						<i class="fa-solid fa-heart"></i>
+					</button>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- COMMENTS -->
+		<div class="mt-5">
+			<h4 class="text-info fw-bold">
+				<i class="fa-solid fa-comments me-2"></i>Bình luận
+			</h4>
+
+			<div class="comment-box mt-3">
+				<textarea class="form-control bg-dark text-light mb-3" rows="3"
+					placeholder="Viết bình luận..."></textarea>
+				<button class="btn btn-info">Gửi bình luận</button>
+			</div>
+
+			<div class="mt-4">
+				<div class="d-flex mb-3">
+					<img src="https://i.pravatar.cc/50" class="rounded-circle me-3">
+					<div>
+						<strong>Nguyễn Minh</strong>
+						<p class="mb-1 text-secondary">Sản phẩm đẹp, chi tiết sắc nét
+							lắm!</p>
+					</div>
+				</div>
+
+				<div class="d-flex mb-3">
+					<img src="https://i.pravatar.cc/51" class="rounded-circle me-3">
+					<div>
+						<strong>Phan Duy</strong>
+						<p class="mb-1 text-secondary">Đóng gói kỹ, giao hàng nhanh!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- RELATED PRODUCTS -->
+		<h3 class="text-info fw-bold mb-4">Sản phẩm liên quan</h3>
+		<div class="row g-4">
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/7f/93/73/7f9373a39beaf970d9f7f2aae62aff0c.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>Figure Anime</h6>
+						<p class="text-info fw-bold">650.000₫</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/65/9f/9d/659f9d3f53f6f40778fabc8d7b9d1dbd.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>Resin Model</h6>
+						<p class="text-info fw-bold">1.000.000₫</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/65/9f/9d/659f9d3f53f6f40778fabc8d7b9d1dbd.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>Resin Model</h6>
+						<p class="text-info fw-bold">1.000.000₫</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="card bg-dark text-light card-glow">
+					<img
+						src="https://i.pinimg.com/736x/65/9f/9d/659f9d3f53f6f40778fabc8d7b9d1dbd.jpg"
+						class="card-img-top rounded">
+					<div class="card-body">
+						<h6>Resin Model</h6>
+						<p class="text-info fw-bold">1.000.000₫</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="text-light mt-5 pt-5 pb-3">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Model World</h5>
+					<p>Mô hình Gundam, Figure & Resin Anime chất lượng cao.</p>
+				</div>
+
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Liên kết</h5>
+					<a href="#" class="footer-link d-block mb-2">Trang chủ</a> <a
+						href="#" class="footer-link d-block mb-2">Sản phẩm</a> <a href="#"
+						class="footer-link d-block mb-2">Giỏ hàng</a> <a href="#"
+						class="footer-link d-block mb-2">Liên hệ</a>
+				</div>
+
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Hỗ trợ</h5>
+					<a href="#" class="footer-link d-block mb-2">Chính sách bảo
+						hành</a> <a href="#" class="footer-link d-block mb-2">Chính sách
+						vận chuyển</a> <a href="#" class="footer-link d-block mb-2">Hướng
+						dẫn mua hàng</a>
+				</div>
+
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Theo dõi</h5>
+					<a href="#" class="footer-link d-block mb-2"><i
+						class="fa-brands fa-facebook me-2"></i>Facebook</a> <a href="#"
+						class="footer-link d-block mb-2"><i
+						class="fa-brands fa-instagram me-2"></i>Instagram</a> <a href="#"
+						class="footer-link d-block mb-2"><i
+						class="fa-brands fa-tiktok me-2"></i>TikTok</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>

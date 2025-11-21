@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh sách sản phẩm</title>
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+	background-color: #0a0a0a; /* dùng bg-dark cũng được */
+	color: #e5e5e5; /* text-light */
+	font-family: 'Roboto', sans-serif;
+	scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+.navbar {
+	background-color: rgba(10, 10, 10, 0.85);
+	backdrop-filter: blur(10px);
+}
+
+.navbar-brand span {
+	color: #0dcaf0;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.nav-link {
+	color: #fff;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.nav-link:hover {
+	color: #0dcaf0;
+}
+
+.navbar-toggler {
+	border-color: #0dcaf0;
+}
+
+/* SEARCH */
+.search-input {
+	border-radius: 50px; /* Bootstrap: rounded-pill */
+	background-color: #121212; /* custom */
+	border: none; /* form-control removes border? */
+	color: #fff;
+	padding-right: 45px;
+}
+
+.search-input::placeholder {
+	color: #888;
+}
+
+.search-btn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: none;
+	background: transparent;
+	color: #0dcaf0;
+	cursor: pointer;
+}
+
+/* BANNER */
+#banner {
+	height: 400px;
+	background-size: cover;
+	background-position: center;
+	border-radius: 16px; /* nếu muốn full-width thì bỏ */
+	margin-top: 20px;
+}
+
+/* Product card */
+.product-card {
+	background: #111; /* bg-dark */
+	border-radius: .75rem; /* rounded */
+	overflow: hidden;
+	border: 1px solid #1f1f1f; /* shadow or border */
+	transition: 0.3s;
+}
+
+.product-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 0 12px #0dcaf0aa;
+}
+
+.product-card img {
+	height: 260px;
+	object-fit: cover;
+}
+
+/* Button info */
+.btn-info {
+	background: #0dcaf0; /* text-dark */
+	border: none;
+	color: #000;
+	transition: 0.3s;
+}
+
+.btn-info:hover {
+	background: #18e1ff;
+	color: #000;
+}
+
+/* Sidebar filters: dùng card */
+.filter-box {
+	background-color: #111; /* bg-dark */
+	border-radius: 12px; /* rounded */
+	padding: 15px; /* p-3 */
+	border: 1px solid #1f1f1f; /* border-secondary? */
+	margin-bottom: 20px; /* mb-4 */
+}
+
+/* Pagination: dùng pagination Bootstrap */
+.pagination .page-link {
+	background-color: #111; /* bg-dark */
+	color: #e5e5e5; /* text-light */
+	border: 1px solid #1f1f1f; /* border-secondary */
+	transition: 0.3s;
+}
+
+.pagination .page-link:hover {
+	background-color: #0dcaf0;
+	color: #000;
+}
+
+.pagination .page-item.active .page-link {
+	background-color: #0dcaf0;
+	color: #000;
+	border-color: #0dcaf0;
+}
+
+/* Footer: giữ custom */
+footer {
+	border-top: 1px solid #333;
+	backdrop-filter: blur(5px);
+}
+
+.footer-link {
+	color: #bbb;
+	transition: 0.25s;
+	text-decoration: none;
+}
+
+.footer-link:hover {
+	color: #0dcaf0;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark py-3">
+		<div class="container">
+			<a class="navbar-brand d-flex align-items-center" href="#"><i
+				class="fas fa-cube fs-3 me-2 text-info"></i><span class="fs-3">Model
+					World</span></a>
+			<button class="navbar-toggler" data-bs-toggle="collapse"
+				data-bs-target="#navMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navMenu">
+				<ul class="navbar-nav ms-4">
+					<li class="nav-item"><a class="nav-link px-3" href="#">Trang
+							chủ</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Sản
+							phẩm</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Hot
+							deal</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#"><i
+							class="fa-solid fa-heart"></i></a></li>
+				</ul>
+				<div class="ms-auto position-relative" style="width: 250px;">
+					<input type="text" class="form-control search-input"
+						placeholder="Tìm Gundam, Figure...">
+					<button class="search-btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+				<button class="btn btn-outline-light ms-3 me-2">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="btn btn-info">
+					<i class="fas fa-shopping-cart"></i>
+				</button>
+			</div>
+		</div>
+	</nav>
+
+	<!-- BANNER -->
+	<div class="container">
+		<div id="banner"></div>
+	</div>
+
+	<!-- BODY -->
+	<div class="container py-4">
+		<div class="row">
+			<!-- SIDEBAR -->
+			<div class="col-md-3 mb-4">
+
+				<!-- Sắp xếp -->
+				<div class="filter-box p-3 mb-3 shadow-sm"
+					style="background-color: #111; border-radius: 12px; border: 1px solid #1f1f1f;">
+					<label class="form-label text-info fw-bold mb-2">Sắp xếp</label> <select
+						name="sort"
+						class="form-select text-light bg-dark border-secondary">
+						<option value="">Mặc định</option>
+						<option value="asc">Giá tăng dần</option>
+						<option value="desc">Giá giảm dần</option>
+					</select>
+				</div>
+
+				<!-- Lọc theo giá -->
+				<div class="filter-box p-3 mb-3 shadow-sm"
+					style="background-color: #111; border-radius: 12px; border: 1px solid #1f1f1f;">
+					<label class="form-label text-info fw-bold mb-2">Giá</label>
+					<div class="d-flex gap-2">
+						<input type="number"
+							class="form-control text-light bg-dark border-secondary"
+							name="minPrice" placeholder="Từ" style="border-radius: 8px;">
+						<input type="number"
+							class="form-control text-light bg-dark border-secondary"
+							name="maxPrice" placeholder="Đến" style="border-radius: 8px;">
+					</div>
+				</div>
+
+
+				<!-- Danh mục -->
+				<div class="filter-box p-3 mb-3 shadow-sm">
+					<h6 class="text-info fw-bold mb-3">Danh mục</h6>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="anime">
+						<label class="form-check-label text-light" for="anime">Anime
+							Figure</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="nendoroid">
+						<label class="form-check-label text-light" for="nendoroid">Nendoroid</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="modelkit">
+						<label class="form-check-label text-light" for="modelkit">Model
+							Kit</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="scalefigure">
+						<label class="form-check-label text-light" for="scalefigure">Scale
+							Figure</label>
+					</div>
+				</div>
+
+				<!-- Thương hiệu -->
+				<div class="filter-box p-3 mb-3 shadow-sm">
+					<h6 class="text-info fw-bold mb-3">Thương hiệu</h6>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="gsmile">
+						<label class="form-check-label text-light" for="gsmile">Good
+							Smile Company</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="bandai">
+						<label class="form-check-label text-light" for="bandai">Bandai
+							Spirits</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="sega">
+						<label class="form-check-label text-light" for="sega">SEGA</label>
+					</div>
+					<div class="form-check mb-2">
+						<input class="form-check-input" type="checkbox" id="megahouse">
+						<label class="form-check-label text-light" for="megahouse">MegaHouse</label>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- PRODUCT LIST -->
+			<div class="col-md-9">
+				<h3 class="text-info fw-bold mb-3">
+					<i class="fa-solid fa-shop me-2"></i>Tất cả sản phẩm
+				</h3>
+				<div class="row g-4">
+					<!-- Sản phẩm mẫu (copy 6 sp) -->
+
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product-card">
+							<img src="https://i.imgur.com/Jk9U53t.jpeg" class="w-100">
+							<div class="p-3">
+								<h6>Raiden Shogun 1/7</h6>
+								<p class="text-info fw-bold">1.750.000₫</p>
+								<div class="d-flex gap-2">
+									<button class="btn btn-info flex-grow-1">
+										<i class="fa-solid fa-cart-plus me-1"></i> Thêm giỏ hàng
+									</button>
+									<button class="btn btn-outline-danger">
+										<i class="fa-solid fa-heart"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- PAGINATION -->
+				<nav aria-label="Page navigation example" class="mt-4">
+					<ul class="pagination justify-content-center">
+						<li class="page-item disabled"><a
+							class="page-link text-dark bg-secondary" href="#" tabindex="-1">Trước</a>
+						</li>
+						<li class="page-item"><a
+							class="page-link text-dark bg-secondary" href="#">1</a></li>
+						<li class="page-item"><a
+							class="page-link text-dark bg-secondary" href="#">2</a></li>
+						<li class="page-item"><a
+							class="page-link text-dark bg-secondary" href="#">3</a></li>
+						<li class="page-item"><a
+							class="page-link text-dark bg-secondary" href="#">Tiếp</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="text-light mt-5 pt-5 pb-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold text-info">Model World</h5>
+					<p>Mô hình Gundam, Figure & Resin Anime chất lượng cao.</p>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold text-info">Liên kết</h5>
+					<a href="#" class="footer-link d-block mb-2">Trang chủ</a> <a
+						href="#" class="footer-link d-block mb-2">Sản phẩm</a> <a href="#"
+						class="footer-link d-block mb-2">Giỏ hàng</a> <a href="#"
+						class="footer-link d-block mb-2">Liên hệ</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold text-info">Hỗ trợ</h5>
+					<a href="#" class="footer-link d-block mb-2">Chính sách bảo
+						hành</a> <a href="#" class="footer-link d-block mb-2">Chính sách
+						vận chuyển</a> <a href="#" class="footer-link d-block mb-2">Hướng
+						dẫn mua hàng</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold text-info">Theo dõi</h5>
+					<a href="#" class="footer-link d-block"><i
+						class="fa-brands fa-facebook me-2"></i>Facebook</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-instagram me-2"></i>Instagram</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-tiktok me-2"></i>TikTok</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+const priceRange = document.getElementById("priceRange");
+const priceValue = document.getElementById("priceValue");
+priceRange.addEventListener("input", () => {
+    priceValue.textContent = Number(priceRange.value).toLocaleString("vi-VN") + "₫";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán - ModelWorld</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    color: #e5e5e5;
+}
+
+.navbar {
+	background-color: rgba(10, 10, 10, 0.85);
+	backdrop-filter: blur(10px);
+}
+
+.navbar-brand span {
+	color: #0dcaf0;
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.nav-link {
+	color: #fff;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.nav-link:hover {
+	color: #0dcaf0;
+}
+
+.navbar-toggler {
+	border-color: #0dcaf0;
+}
+
+/* SEARCH */
+.search-input {
+	border-radius: 50px;
+	background-color: #121212;
+	border: none;
+	color: #fff;
+	padding-right: 45px;
+}
+
+.search-input::placeholder {
+	color: #888;
+}
+
+.search-btn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: none;
+	background: transparent;
+	color: #0dcaf0;
+	cursor: pointer;
+}
+
+/* Text & Button info */
+.text-info-custom {
+    color: #0dcaf0;
+}
+
+.btn-info-custom {
+    background: #0dcaf0;
+    color: #000;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-info-custom:hover {
+    background: #3dd5ff;
+    color: #000;
+    box-shadow: 0 0 12px #0dcaf077;
+}
+
+/* Card chung */
+.card {
+    background-color: #121212;
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
+}
+
+/* Card header */
+.card-header {
+    font-family: 'Orbitron', sans-serif;
+    color: #0dcaf0;
+    font-size: 1.15rem;
+    background-color: #151515;
+    border-bottom: 1px solid #222;
+}
+
+/* Inputs */
+.form-floating > label {
+    color: #0dcaf0;
+}
+.form-control {
+    background-color: #0a0a0a;
+    color: #fff;
+    border: 1px solid #333;
+}
+.form-control:focus {
+    border-color: #0dcaf0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+}
+
+/* Select */
+.select-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+}
+.tech-select {
+    appearance: none;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 12px;
+    width: 100%;
+}
+.select-wrapper i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    color: #0dcaf0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: .3s;
+}
+.tech-select:focus + i {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Giỏ hàng */
+.list-group-item {
+    background: #121212;
+    border: 1px solid #1f1f1f;
+    color: #e5e5e5;
+    font-size: 0.95rem;
+}
+
+/* Tổng tiền */
+.total-box {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0dcaf0;
+    text-align: right;
+}
+
+footer {
+	border-top: 1px solid #333;
+	backdrop-filter: blur(5px);
+}
+
+.footer-link {
+	color: #bbb;
+	transition: 0.25s;
+	text-decoration: none;
+}
+
+.footer-link:hover {
+	color: #0dcaf0;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark py-3">
+		<div class="container">
+			<a class="navbar-brand d-flex align-items-center" href="#"><i
+				class="fas fa-cube fs-3 me-2 text-info"></i><span class="fs-3">Model
+					World</span></a>
+			<button class="navbar-toggler" data-bs-toggle="collapse"
+				data-bs-target="#navMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navMenu">
+				<ul class="navbar-nav ms-4">
+					<li class="nav-item"><a class="nav-link px-3" href="#">Trang
+							chủ</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Sản
+							phẩm</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#">Hot
+							deal</a></li>
+					<li class="nav-item"><a class="nav-link px-3" href="#"><i
+							class="fa-solid fa-heart"></i></a></li>
+				</ul>
+				<div class="ms-auto position-relative" style="width: 250px;">
+					<input type="text" class="form-control search-input"
+						placeholder="Tìm Gundam, Figure...">
+					<button class="search-btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+				<button class="btn btn-outline-light ms-3 me-2">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="btn btn-info">
+					<i class="fas fa-shopping-cart"></i>
+				</button>
+			</div>
+		</div>
+	</nav>
+<div class="container py-5">
+    <h3 class="fw-bold text-info-custom mb-4 text-center">
+        <i class="fa-solid fa-file-invoice-dollar me-2"></i>Thanh toán
+    </h3>
+
+    <div class="row justify-content-center">
+
+        <!-- Thông tin giao hàng -->
+        <div class="col-lg-7 mb-4">
+            <div class="card p-4 shadow-lg">
+                <div class="card-header mb-3">Thông tin giao hàng</div>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="fullname" placeholder="Họ tên">
+                        <label for="fullname"><i class="fa-solid fa-user me-1"></i>Họ tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <label for="email"><i class="fa-solid fa-at me-1"></i>Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="address" placeholder="Địa chỉ">
+                        <label for="address"><i class="fa-solid fa-location-dot me-1"></i>Địa chỉ</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phone" placeholder="Số điện thoại">
+                        <label for="phone"><i class="fa-solid fa-phone me-1"></i>Số điện thoại</label>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <select class="tech-select">
+                            <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                            <option value="MOMO">Momo</option>
+                            <option value="VNPAY">VNPay</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <button type="submit" class="btn btn-info-custom w-100 py-2 fw-semibold mt-3">
+                        Xác nhận đặt hàng
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Giỏ hàng -->
+        <div class="col-lg-5">
+            <div class="card p-4 shadow-lg">
+                <div class="card-header mb-3">Đơn hàng của bạn</div>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Gundam RX-78 <span>2 × 850.000₫</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Iron Man MK85 <span>1 × 1.200.000₫</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Porsche 911 <span>3 × 350.000₫</span>
+                    </li>
+                </ul>
+                <div class="total-box">Tổng cộng: 3.750.000₫</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="bg-dark text-light mt-5 pt-5 pb-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Model World</h5>
+					<p>Mô hình Gundam, Figure & Resin Anime chất lượng cao.</p>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Liên kết</h5>
+					<a href="#" class="footer-link d-block mb-2">Trang chủ</a> <a
+						href="#" class="footer-link d-block mb-2">Sản phẩm</a> <a href="#"
+						class="footer-link d-block mb-2">Giỏ hàng</a> <a href="#"
+						class="footer-link d-block mb-2">Liên hệ</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Hỗ trợ</h5>
+					<a href="#" class="footer-link d-block mb-2">Chính sách bảo
+						hành</a> <a href="#" class="footer-link d-block mb-2">Chính sách
+						vận chuyển</a> <a href="#" class="footer-link d-block mb-2">Hướng
+						dẫn mua hàng</a>
+				</div>
+				<div class="col-md-3 mb-4">
+					<h5 class="fw-bold mb-3">Theo dõi</h5>
+					<a href="#" class="footer-link d-block"><i
+						class="fa-brands fa-facebook me-2"></i>Facebook</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-instagram me-2"></i>Instagram</a> <a href="#"
+						class="footer-link d-block"><i
+						class="fa-brands fa-tiktok me-2"></i>TikTok</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
