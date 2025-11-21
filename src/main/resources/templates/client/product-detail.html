@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -362,3 +363,282 @@ footer {
 
 </body>
 </html>
+=======
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${product.name} + ' - Mom Physic'">Chi tiết sản phẩm</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+body {
+	background-color: #0b021c;
+	color: #fff;
+}
+.navbar, footer {
+	background-color: #150035;
+}
+.text-gold {
+	color: #e6c300 !important;
+}
+.btn-gold {
+	background-color: #e6c300;
+	color: #150035;
+	border: none;
+	transition: all 0.3s ease;
+	font-weight: 600;
+}
+.btn-gold:hover {
+	background-color: #f1d500;
+	transform: translateY(-2px);
+}
+.card {
+	background-color: #1c093a;
+	border: 1px solid #3d1a78;
+}
+.card:hover {
+	box-shadow: 0 0 20px #3d1a78;
+}
+.border-gold {
+	border-color: #e6c300 !important;
+}
+/* Navbar search bar */
+.search-bar input::placeholder {
+	color: #bbb;
+}
+.search-bar select option {
+	background-color: #1c093a;
+	color: white;
+}
+.search-bar .form-control:focus, .search-bar .form-select:focus {
+	box-shadow: 0 0 5px #e6c300;
+	border: none;
+}
+.navbar-nav .nav-link {
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+	color: #fff !important;
+}
+/* Form (filter, quantity, comment) */
+.filter-form .form-control, .filter-form .form-select, .filter-form .form-floating>.form-control {
+    background-color: #1c093a !important;
+    color: #fff;
+    border: 1px solid #3d1a78;
+}
+.filter-form .form-control:focus, .filter-form .form-select:focus,
+.filter-form .form-floating>.form-control:focus {
+    box-shadow: 0 0 5px #e6c300;
+    border-color: #e6c300;
+    background-color: #1c093a;
+    color: #fff;
+}
+.filter-form option {
+    background-color: #1c093a;
+    color: white;
+}
+.filter-form .form-control::placeholder {
+    color: #bbb;
+}
+.filter-form .form-floating>label {
+    color: #bbb;
+}
+.filter-form .form-floating>.form-control:focus~label,
+.filter-form .form-floating>.form-control:not(:placeholder-shown)~label {
+    color: #e6c300;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3"
+	style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+	<div class="container">
+		<a class="navbar-brand d-flex align-items-center gap-2" href="/">
+			<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="40">
+			<span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+		</a>
+
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav">
+			<ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
+				<li class="nav-item mx-2">
+					<a class="nav-link text-gold" href="/products">
+						<i class="bi bi-box-seam fs-5"></i>
+					</a>
+				</li>
+				<th:block th:if="${session.account == null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/login">
+							<i class="bi bi-box-arrow-in-right fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+				<th:block th:if="${session.account != null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/cart">
+							<i class="bi bi-cart3 fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/orders">
+							<i class="bi bi-bag-check fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/wishlist">
+							<i class="bi bi-heart fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item dropdown mx-2">
+						<a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img th:if="${session.account.photo != null}"
+								th:src="@{${session.account.photo}}" alt="avatar"
+								class="rounded-circle border border-gold"
+								style="width: 36px; height: 36px; object-fit: cover;">
+							<i th:if="${session.account.photo == null}"
+								class="bi bi-person-circle fs-3 text-warning"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+							aria-labelledby="userDropdown">
+							<li><a class="dropdown-item d-flex align-items-center gap-2" href="/account"><i class="bi bi-person"></i> Thông tin tài khoản</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item d-flex align-items-center gap-2" href="/logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+						</ul>
+					</li>
+				</th:block>
+			</ul>
+			<form action="/products" method="get" class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0 search-bar">
+			    <div class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
+			        <input type="text"
+			            class="form-control bg-transparent text-light border-0 shadow-none"
+			            placeholder="Tìm sản phẩm..." name="keyword" th:value="${keyword}"> 
+			        <select class="form-select bg-transparent text-light border-0 shadow-none w-auto" name="categoryId">
+			            <option value="">Tất cả danh mục</option>
+			            <option th:each="cate : ${categories}" 
+			            		th:value="${cate.id}" 
+			            		th:text="${cate.name}"
+			            		th:selected="${cate.id != null && cate.id.toString() == selectedCategory}">
+			            </option>
+			        </select>
+			    </div>
+			    <button type="submit"
+			        class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
+			        <i class="bi bi-search"></i>
+			    </button>
+			</form>
+		</div>
+	</div>
+</nav>
+
+<!-- ✅ Thông báo khi thêm vào yêu thích -->
+<div th:if="${message}" class="alert alert-success text-center border border-gold bg-dark bg-opacity-75 text-light m-0">
+	<i class="bi bi-check-circle text-gold"></i>
+	<span th:text="${message}"></span>
+</div>
+
+<!-- Nội dung chi tiết sản phẩm -->
+<div class="container py-5">
+	<div class="card shadow-lg">
+		<div class="card-body p-lg-5">
+			<div class="row">
+				<div class="col-md-5">
+					<img th:src="${product.image} ?: '/images/no-image.jpg'"
+						 class="img-fluid rounded shadow-sm" alt="Ảnh sản phẩm">
+				</div>
+				<div class="col-md-7">
+					<h3 class="text-gold fw-bold" th:text="${product.name}"></h3>
+					<h5 class="text-danger mt-2"
+						th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></h5>
+					<p class="text-light opacity-75"
+					   th:text="${product.category != null ? product.category.name : 'Không có danh mục'}"></p>
+
+					<hr class="border-light opacity-25">
+
+					<!-- ✅ Form thêm giỏ hàng + yêu thích -->
+					<form th:action="@{'/cart/add/' + ${product.id}}" method="get" class="mt-3 filter-form d-flex flex-wrap align-items-center gap-3">
+						<div>
+							<label for="qty" class="form-label text-light">Số lượng</label>
+							<input type="number" name="quantity" id="qty" class="form-control w-50" value="1" min="1">
+						</div>
+
+						<div class="d-flex align-items-center gap-2 mt-3 mt-md-0">
+							<button type="submit" class="btn btn-gold">
+								<i class="bi bi-cart-plus"></i> Thêm vào giỏ hàng
+							</button>
+
+							<a th:href="@{'/wishlist/add/' + ${product.id}}" class="btn btn-outline-danger">
+								<i class="bi bi-heart"></i> Yêu thích
+							</a>
+
+							<a href="/products" class="btn btn-outline-light">← Quay lại</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bình luận -->
+	<div class="mt-5">
+		<h4 class="mb-4 text-gold fw-bold">💬 Bình luận</h4>
+
+		<th:block th:if="${session.account != null}">
+			<form th:action="@{'/product-detail/' + ${product.id} + '/comment'}" method="post" class="mb-4 filter-form">
+				<div class="form-floating">
+					<textarea name="content" class="form-control" placeholder="Viết bình luận..." required style="height: 100px"></textarea>
+					<label>Viết bình luận...</label>
+				</div>
+				<button type="submit" class="btn btn-gold mt-3">
+					<i class="bi bi-send"></i> Gửi
+				</button>
+			</form>
+		</th:block>
+
+		<th:block th:if="${session.account == null}">
+			<div class="alert bg-warning bg-opacity-10 border border-warning text-warning">
+				<i class="bi bi-info-circle"></i> Vui lòng
+				<a href="/login" class="text-decoration-none fw-semibold text-warning">đăng nhập</a>
+				để bình luận.
+			</div>
+		</th:block>
+
+		<div th:if="${#lists.isEmpty(comments)}">
+			<p class="text-light opacity-75 fst-italic">Chưa có bình luận nào.</p>
+		</div>
+
+		<div th:each="cmt : ${comments}" class="border-bottom border-light border-opacity-25 py-3">
+			<div class="d-flex align-items-start gap-3">
+				<img th:src="${cmt.account != null && cmt.account.photo != null ? cmt.account.photo : '/images/default-avatar.png'}"
+					 alt="avatar" class="rounded-circle border border-gold"
+					 style="width: 45px; height: 45px; object-fit: cover;">
+				<div>
+					<strong class="text-gold" th:text="${cmt.account != null ? cmt.account.fullName : 'Người dùng ẩn'}"></strong>
+					<small class="text-light opacity-50 ms-2" th:text="${#temporals.format(cmt.createdDate, 'dd/MM/yyyy HH:mm')}"></small>
+					<p class="mb-0 mt-1 text-light" th:text="${cmt.content}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="text-center py-4 border-top border-warning mt-5">
+	<p class="mb-0 text-gold">© 2025 Mom Physic. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+>>>>>>> 3f79aec501d18d0c72ccf8cffb73c2da0212df97

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mom Physic - Quản lý danh mục</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+	background: radial-gradient(circle at top left, #1a0030, #2a0065);
+	color: #fff;
+	min-height: 100vh;
+}
+
+.navbar {
+	background: linear-gradient(90deg, #150035, #2d007a);
+	border-bottom: 1px solid #ffd700;
+}
+
+.card {
+	background-color: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 215, 0, 0.3);
+	border-radius: 15px;
+	backdrop-filter: blur(8px);
+}
+
+.card h6, label, th {
+	color: #ffd700;
+}
+
+.table td {
+	color: #fff;
+	vertical-align: middle;
+}
+
+.btn-gold {
+	background: linear-gradient(90deg, #ffd700, #ffae00);
+	color: #150035;
+	font-weight: 600;
+	border: none;
+	transition: 0.3s;
+}
+
+.btn-gold:hover {
+	background: linear-gradient(90deg, #ffae00, #ffd700);
+	transform: scale(1.05);
+}
+
+img.category-img {
+	border-radius: 10px;
+	border: 1px solid #ffd700;
+	transition: 0.3s;
+}
+
+img.category-img:hover {
+	transform: scale(1.08);
+}
+
+footer {
+	color: #bbb;
+}
+
+a {
+	text-decoration: none;
+}
+
+.alert-custom {
+	border: 1px solid #ffd700;
+	background-color: rgba(255, 215, 0, 0.1);
+	color: #ffd700;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- 🌟 NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">
+		<div class="container-fluid">
+			<a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+				<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="45" class="me-2">
+				<span class="fw-bold text-warning fs-4">Mom Physic</span>
+			</a>
+		</div>
+	</nav>
+
+	<div class="container py-5">
+
+		<!-- 🏷️ TIÊU ĐỀ -->
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h2 class="text-warning mb-0">
+				<i class="bi bi-tags"></i> Quản lý danh mục
+			</h2>
+			<a th:href="@{/stats}" class="btn btn-gold">
+				<i class="bi bi-arrow-left-circle me-1"></i> Về menu Admin
+			</a>
+		</div>
+
+		<!-- ⚡ THÔNG BÁO -->
+		<div th:if="${param.success}" class="alert alert-custom alert-dismissible fade show text-center mb-4">
+			<i class="bi bi-check-circle-fill me-2"></i> Cập nhật thành công!
+			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+		</div>
+
+		<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show text-center mb-4">
+			<i class="bi bi-exclamation-triangle-fill me-2"></i>
+			<span th:switch="${param.error}">
+				<span th:case="'emptyName'">Tên danh mục không được để trống!</span>
+				<span th:case="'notfound'">Không tìm thấy danh mục để cập nhật!</span>
+				<span th:case="*">Đã xảy ra lỗi, vui lòng thử lại!</span>
+			</span>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+
+		<!-- 📋 DANH SÁCH DANH MỤC -->
+		<div class="card shadow mb-5">
+			<div class="card-body p-0">
+				<table class="table table-dark table-hover mb-0 text-center align-middle">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Tên danh mục</th>
+							<th>Hình ảnh</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="c : ${categories}">
+							<td th:text="${c.id}">1</td>
+							<td th:text="${c.name}">Figure</td>
+							<td>
+								<img th:src="@{${c.image}}" width="80" class="category-img" alt="Hình danh mục">
+							</td>
+							<td>
+								<button class="btn btn-sm btn-gold"
+									th:attr="data-bs-id=${c.id},data-bs-name=${c.name},data-bs-image=@{${c.image}}"
+									data-bs-toggle="modal" data-bs-target="#editCategoryModal">
+									<i class="bi bi-pencil-square"></i> Sửa
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- ➕ FORM THÊM DANH MỤC -->
+		<div class="card p-4 shadow-lg">
+			<h5 class="text-warning mb-3">
+				<i class="bi bi-plus-circle"></i> Thêm danh mục mới
+			</h5>
+			<form th:action="@{/cata-mana/add}" method="post" enctype="multipart/form-data">
+				<div class="mb-3">
+					<label class="form-label text-warning">Tên danh mục</label>
+					<input type="text" name="name"
+						class="form-control bg-dark text-light border-warning"
+						placeholder="Nhập tên danh mục" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label text-warning">Hình ảnh (chọn tệp)</label>
+					<input type="file" name="image"
+						class="form-control bg-dark text-light border-warning"
+						accept="image/*" required>
+				</div>
+				<button type="submit" class="btn btn-gold w-100 py-2">
+					<i class="bi bi-save2"></i> Thêm danh mục
+				</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- ✏️ MODAL SỬA DANH MỤC -->
+	<div class="modal fade" id="editCategoryModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark text-light border-warning">
+				<div class="modal-header border-warning">
+					<h5 class="modal-title text-warning">
+						<i class="bi bi-pencil-square"></i> Sửa danh mục
+					</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/cata-mana/update}" method="post"
+						enctype="multipart/form-data" id="editCategoryForm">
+						<input type="hidden" name="id" id="editId">
+						<div class="mb-3">
+							<label class="form-label text-warning">Tên danh mục</label>
+							<input type="text" name="name" id="editName"
+								class="form-control bg-dark text-light border-warning" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label text-warning">Hình ảnh mới (tùy chọn)</label>
+							<input type="file" name="imageFile"
+								class="form-control bg-dark text-light border-warning"
+								accept="image/*">
+						</div>
+						<div class="text-center mb-3">
+							<img id="previewImage" src="" width="100" class="category-img" alt="Ảnh hiện tại">
+						</div>
+						<button type="submit" class="btn btn-gold w-100 py-2">
+							<i class="bi bi-save2"></i> Lưu thay đổi
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 🪶 FOOTER -->
+	<footer class="text-center py-4 mt-5">
+		<small>© 2025 <span class="text-warning">Mom Physic</span> | Category Management</small>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		var editModal = document.getElementById('editCategoryModal');
+		editModal.addEventListener('show.bs.modal', function(event) {
+			var button = event.relatedTarget;
+			document.getElementById('editId').value = button.getAttribute('data-bs-id');
+			document.getElementById('editName').value = button.getAttribute('data-bs-name');
+			document.getElementById('previewImage').src = button.getAttribute('data-bs-image');
+		});
+	</script>
+
+</body>
+</html>

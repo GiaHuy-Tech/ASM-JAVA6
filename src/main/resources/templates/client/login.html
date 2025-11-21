@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -96,10 +97,136 @@ body {
     font-weight: bold;
     color: #f8d067;
     text-align: right;
+=======
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đăng nhập - Mom Physic</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+/* --- giữ nguyên toàn bộ CSS của bạn --- */
+body {
+	background: radial-gradient(circle at top, #1a1440, #0b0920);
+	color: #f5f5f5;
+	font-family: "Segoe UI", Roboto, sans-serif;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.text-gold {
+	color: #e6c300 !important;
+}
+
+.btn-gold {
+	background: linear-gradient(90deg, #e6c300, #ffde59);
+	color: #150035;
+	font-weight: 600;
+	border: none;
+	transition: 0.3s ease-in-out;
+	box-shadow: 0 0 10px rgba(230, 195, 0, 0.4);
+}
+
+.btn-gold:hover {
+	background: linear-gradient(90deg, #ffde59, #ffe77a);
+	transform: translateY(-2px);
+	box-shadow: 0 0 18px rgba(255, 222, 89, 0.6);
+}
+
+.card {
+	background: rgba(26, 23, 53, 0.95);
+	border: 1px solid rgba(230, 195, 0, 0.3);
+	box-shadow: 0 0 30px rgba(230, 195, 0, 0.15);
+	border-radius: 16px;
+	backdrop-filter: blur(8px);
+}
+
+.card-title {
+	color: #e6c300;
+	font-weight: 700;
+	text-align: center;
+}
+
+.form-control {
+	background-color: #120f27;
+	border: 1px solid #3b3486;
+	color: #fff;
+}
+
+.form-control:focus {
+	border-color: #e6c300;
+	box-shadow: 0 0 0 0.2rem rgba(230, 195, 0, 0.25);
+	background-color: #181534;
+}
+
+label {
+	font-size: 0.9rem;
+}
+
+.alert {
+	border-radius: 8px;
+	font-size: 0.9rem;
+	padding: 8px 12px;
+}
+
+footer {
+	margin-top: auto;
+	background-color: #120f27;
+	border-top: 1px solid #e6c300;
+	color: #bbb;
+	padding: 1rem;
+}
+
+footer p {
+	margin: 0;
+	color: #e6c300;
+}
+
+.navbar {
+	background: linear-gradient(90deg, #150035, #2d007a);
+	border-bottom: 1px solid #e6c300;
+}
+
+.navbar .nav-link {
+	color: #e6c300 !important;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+	color: #ffde59 !important;
+}
+
+.form-control::placeholder {
+	color: #e6c300;
+	opacity: 0.8;
+}
+
+.form-control {
+	color: #ffffff;
+	transition: all 0.25s ease-in-out;
+}
+
+.form-control:focus {
+	color: #ffffff;
+	border-color: #e6c300;
+	box-shadow: 0 0 0 0.2rem rgba(230, 195, 0, 0.25);
+	background-color: #181534;
+>>>>>>> 3f79aec501d18d0c72ccf8cffb73c2da0212df97
 }
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -167,3 +294,193 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+=======
+	<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3"
+	style="background: linear-gradient(90deg, #150035, #2d007a); border-bottom: 1px solid #e6c300;">
+	<div class="container">
+		<!-- Logo -->
+		<a class="navbar-brand d-flex align-items-center gap-2" href="/">
+			<img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+				alt="logo" width="40">
+			<span class="fw-bold text-gold fs-4 mb-0">Mom Physic</span>
+		</a>
+
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button"
+			data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Menu -->
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navbarNav">
+			<ul class="navbar-nav align-items-lg-center mb-2 mb-lg-0">
+
+				<!-- Trang sản phẩm -->
+				<li class="nav-item mx-2">
+					<a class="nav-link text-gold" href="/products">
+						<i class="bi bi-box-seam fs-5"></i>
+					</a>
+				</li>
+
+				<!-- Nếu chưa đăng nhập -->
+				<th:block th:if="${session.account == null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/login">
+							<i class="bi bi-box-arrow-in-right fs-5"></i>
+						</a>
+					</li>
+				</th:block>
+
+				<!-- Nếu đã đăng nhập -->
+				<th:block th:if="${session.account != null}">
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/cart">
+							<i class="bi bi-cart3 fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/orders">
+							<i class="bi bi-bag-check fs-5"></i>
+						</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link text-gold" href="/wishlist">
+							<i class="bi bi-heart fs-5"></i>
+						</a>
+					</li>
+
+					<!-- Dropdown avatar -->
+					<li class="nav-item dropdown mx-2">
+						<a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<!-- Nếu có avatar thì hiển thị ảnh -->
+							<img th:if="${session.account.photo != null}"
+								th:src="@{${session.account.photo}}" alt="avatar"
+								class="rounded-circle border border-gold"
+								style="width: 36px; height: 36px; object-fit: cover;">
+							<!-- Nếu chưa có avatar thì hiển thị icon -->
+							<i th:if="${session.account.photo == null}"
+								class="bi bi-person-circle fs-3 text-warning"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+							aria-labelledby="userDropdown">
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/account">
+									<i class="bi bi-person"></i>
+									<span>Thông tin tài khoản</span>
+								</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item d-flex align-items-center gap-2" href="/logout">
+									<i class="bi bi-box-arrow-right"></i>
+									<span>Đăng xuất</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Search -->
+			<form class="d-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+				<div class="d-flex align-items-center rounded-pill border border-gold px-3 py-1 bg-transparent">
+					<input type="text"
+						class="form-control bg-transparent text-light border-0 shadow-none"
+						placeholder="Tìm sản phẩm...">
+					<select class="form-select bg-transparent text-light border-0 shadow-none w-auto">
+						<option selected>Danh mục</option>
+						<option>Gundam</option>
+						<option>Marvel</option>
+						<option>Ô tô</option>
+						<option>Collectibles</option>
+					</select>
+				</div>
+				<a href="#"
+					class="btn btn-gold rounded-pill ms-2 px-3 d-flex align-items-center gap-1">
+					<i class="bi bi-search"></i>
+				</a>
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+	<section class="py-5 my-auto">
+		<div class="container">
+			<div class="row justify-content-center align-items-center"
+				style="min-height: 70vh;">
+				<div class="col-md-5">
+					<div class="card p-4">
+						<h5 class="card-title mb-4">
+							<i class="bi bi-lock-fill me-2"></i>Đăng nhập tài khoản
+						</h5>
+
+						<div th:if="${param.email_error}" class="alert alert-danger"
+							th:text="${param.email_error}"></div>
+						<div th:if="${param.pass_error}" class="alert alert-danger"
+							th:text="${param.pass_error}"></div>
+						<div th:if="${param.error}" class="alert alert-danger"
+							th:text="${param.error}"></div>
+						<div th:if="${param.notfound}" class="alert alert-danger"
+							th:text="${param.notfound}"></div>
+						<div th:if="${param.locked}" class="alert alert-danger"
+							th:text="${param.locked}"></div>
+
+
+						<div th:if="${param.success != null}" class="alert alert-success">
+							Đăng ký tài khoản thành công! Vui lòng đăng nhập.</div>
+						<div th:if="${param.logout}" class="alert alert-success">Bạn
+							đã đăng xuất thành công.</div>
+
+						<form th:action="@{/login}" method="post">
+							<div class="mb-3">
+								<input type="email" class="form-control" name="email"
+									placeholder="Email" th:value="${param.email}">
+							</div>
+
+							<div class="mb-3">
+								<input type="password" class="form-control" name="password"
+									placeholder="Mật khẩu">
+							</div>
+
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="checkbox" name="remember"
+									id="remember"> <label
+									class="form-check-label text-light" for="remember">Ghi
+									nhớ đăng nhập</label>
+							</div>
+
+							<button type="submit" class="btn btn-gold w-100 py-2">Đăng
+								nhập</button>
+						</form>
+
+						<hr class="border-secondary my-4">
+
+						<div class="text-center small">
+							<p class="text-light">
+								Chưa có tài khoản? <a href="/register" class="text-gold">Đăng
+									ký ngay</a>
+							</p>
+							<p>
+								<a href="/forgot" class="text-gold">Quên mật khẩu?</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="text-center">
+		<p>© 2025 Mom Physic. All Rights Reserved.</p>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+>>>>>>> 3f79aec501d18d0c72ccf8cffb73c2da0212df97
